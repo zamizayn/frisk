@@ -129,10 +129,10 @@ const Banners = () => {
             )}
 
             {isModalOpen && (
-                <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, backdropFilter: 'blur(4px)' }}>
-                    <form onSubmit={handleSubmit} className="glass" style={{ width: '100%', maxWidth: '500px', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-                        <h2>{isEditing ? 'Edit Banner' : 'New Promotion'}</h2>
-                        {error && <div style={{ color: 'var(--danger)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><AlertCircle size={16} /> {error}</div>}
+                <div className="modal-overlay">
+                    <form onSubmit={handleSubmit} className="modal-content" style={{ width: '100%', maxWidth: '500px', padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                        <h2 style={{ marginBottom: '0.5rem' }}>{isEditing ? 'Edit Banner' : 'New Promotion'}</h2>
+                        {error && <div className="error-alert"><AlertCircle size={18} /> {error}</div>}
                         
                         <div>
                             <label className="label">Title</label>
@@ -140,7 +140,7 @@ const Banners = () => {
                         </div>
                         <div>
                             <label className="label">Description</label>
-                            <textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} style={{ width: '100%', height: '80px', background: 'var(--bg-dark)', border: '1px solid var(--border)', borderRadius: '8px', padding: '0.8rem', color: 'white' }} />
+                            <textarea value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} style={{ width: '100%', height: '80px' }} />
                         </div>
                         <div>
                             <label className="label">Image URL</label>
@@ -150,8 +150,8 @@ const Banners = () => {
                             <label className="label">Redirect Link (e.g. /shop)</label>
                             <input type="text" value={formData.link} onChange={(e) => setFormData({ ...formData, link: e.target.value })} style={{ width: '100%' }} />
                         </div>
-                        <div style={{ display: 'flex', gap: '1rem' }}>
-                            <button type="button" onClick={closeModal} style={{ flex: 1, background: 'rgba(255,255,255,0.05)', color: 'white' }}>Cancel</button>
+                        <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                            <button type="button" onClick={closeModal} className="btn-secondary" style={{ flex: 1 }}>Cancel</button>
                             <button type="submit" className="btn-primary" style={{ flex: 1 }}>{isEditing ? 'Save Changes' : 'Create Banner'}</button>
                         </div>
                     </form>

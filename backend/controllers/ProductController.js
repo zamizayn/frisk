@@ -1,11 +1,11 @@
-const { Product, Category, ProductVariant, sequelize } = require('../models');
+const { Product, Category, SubCategory, ProductVariant, sequelize } = require('../models');
 const { Op } = require('sequelize');
 
 // @desc    Get all products with search and filters
 // @route   GET /api/products
 exports.getProducts = async (req, res) => {
   try {
-    const { search, categoryId, minPrice, maxPrice } = req.query;
+    const { search, categoryId, subCategoryId, minPrice, maxPrice } = req.query;
     
     let where = {};
     if (search) {
@@ -17,6 +17,9 @@ exports.getProducts = async (req, res) => {
     if (categoryId) {
       where.categoryId = categoryId;
     }
+    if (subCategoryId) {
+      where.subCategoryId = subCategoryId;
+    }
     if (minPrice || maxPrice) {
       where.price = {};
       if (minPrice) where.price[Op.gte] = minPrice;
@@ -27,6 +30,7 @@ exports.getProducts = async (req, res) => {
       where,
       include: [
         { model: Category, as: 'category', attributes: ['name'] },
+        { model: SubCategory, as: 'subcategory', attributes: ['name'] },
         { model: ProductVariant, as: 'variants' }
       ],
       order: [['createdAt', 'DESC']]
@@ -44,6 +48,7 @@ exports.getProductById = async (req, res) => {
     const product = await Product.findByPk(req.params.id, {
       include: [
         { model: Category, as: 'category' },
+        { model: SubCategory, as: 'subcategory' },
         { model: ProductVariant, as: 'variants' }
       ]
     });
@@ -60,7 +65,7 @@ exports.getProductById = async (req, res) => {
 exports.createProduct = async (req, res) => {
   const transaction = await sequelize.transaction();
   try {
-    const { name, description, price, stock, categoryId, imageUrl, variants } = req.body;
+    const { name, description, price, stock, categoryId, subCategoryId, imageUrl, variants } = req.body;
     
     const product = await Product.create({
       name,
@@ -68,6 +73,7 @@ exports.createProduct = async (req, res) => {
       price,
       stock,
       categoryId,
+      subCategoryId,
       imageUrl
     }, { transaction });
 

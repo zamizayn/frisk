@@ -40,7 +40,7 @@ const Login = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'radial-gradient(circle at top right, var(--primary) -20%, var(--bg-dark) 40%)'
+            background: 'radial-gradient(circle at top right, rgba(99, 102, 241, 0.08) 0%, var(--bg-dark) 100%)'
         }}>
             <form 
                 onSubmit={handleLogin}
@@ -85,7 +85,7 @@ const Login = () => {
                             placeholder="admin@example.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            style={{ width: '100%', paddingLeft: '2.5rem' }}
+                            style={{ width: '100%', paddingLeft: '2.8rem', background: '#ffffff', color: '#1e293b' }}
                             required
                         />
                     </div>
@@ -100,7 +100,7 @@ const Login = () => {
                             placeholder="••••••••"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            style={{ width: '100%', paddingLeft: '2.5rem' }}
+                            style={{ width: '100%', paddingLeft: '2.8rem', background: '#ffffff', color: '#1e293b' }}
                             required
                         />
                     </div>

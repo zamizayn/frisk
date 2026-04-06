@@ -63,7 +63,7 @@ const Orders = () => {
                     <div className="glass" style={{ overflow: 'hidden' }}>
                         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                             <thead>
-                                <tr style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                                <tr style={{ background: 'var(--bg-dark)', color: 'var(--text-muted)', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
                                     <th style={{ padding: '1.2rem' }}>Order ID</th>
                                     <th style={{ padding: '1.2rem' }}>Date</th>
                                     <th style={{ padding: '1.2rem' }}>Status</th>
@@ -115,14 +115,14 @@ const Orders = () => {
                             </div>
 
                             {/* Status Update Dropdown */}
-                            <div style={{ marginBottom: '1.5rem', padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid var(--border)' }}>
-                                <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.8rem' }}>Change Order Status</label>
+                            <div style={{ marginBottom: '1.5rem', padding: '1.2rem', background: 'var(--bg-dark)', borderRadius: '12px', border: '1px solid var(--border)' }}>
+                                <label className="label">Change Order Status</label>
                                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                                     <select 
                                         value={selectedOrder.status}
                                         onChange={(e) => updateStatus(e.target.value)}
                                         disabled={updating}
-                                        style={{ flex: 1, padding: '0.6rem', background: 'var(--bg-dark)' }}
+                                        style={{ flex: 1, padding: '0.6rem', background: '#ffffff', color: '#1e293b' }}
                                     >
                                         <option value="pending">Pending</option>
                                         <option value="completed">Completed</option>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../api';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -23,12 +23,11 @@ const BannerSlider = () => {
         fetchBanners();
     }, []);
 
-    // Auto-slide logic
     useEffect(() => {
         if (banners.length > 1) {
             const timer = setInterval(() => {
                 setCurrentIndex((prev) => (prev + 1) % banners.length);
-            }, 6000); // 6 seconds per slide
+            }, 6000);
             return () => clearInterval(timer);
         }
     }, [banners]);
@@ -36,89 +35,70 @@ const BannerSlider = () => {
     const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % banners.length);
     const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + banners.length) % banners.length);
 
-    if (loading) return <div style={{ height: '70vh', background: '#f8f9fa' }}></div>;
+    if (loading) return <div style={{ height: '70vh', background: 'var(--bg-secondary)' }}></div>;
     if (banners.length === 0) return null;
 
     const currentBanner = banners[currentIndex];
 
     return (
-        <section style={{ position: 'relative', height: '80vh', overflow: 'hidden', background: '#000' }}>
+        <section style={{ 
+            position: 'relative', 
+            height: '75vh', 
+            overflow: 'hidden', 
+            background: 'var(--bg-secondary)',
+            margin: '2rem 1.5rem',
+            borderRadius: '24px',
+            boxShadow: '0 10px 40px rgba(0,0,0,0.05)'
+        }}>
             <AnimatePresence mode="wait">
-                <motion.div
-                    key={currentIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.8 }}
-                    style={{
-                        position: 'absolute',
-                        inset: 0,
-                        backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%), url(${currentBanner.imageUrl})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        display: 'flex',
-                        alignItems: 'center'
-                    }}
-                >
-                    <div className="container">
-                        <div style={{ maxWidth: '600px', color: 'white' }}>
-                            <motion.h1 
-                                initial={{ y: 30, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.2 }}
-                                style={{ fontSize: '4.5rem', fontWeight: 900, marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-2px' }}
-                            >
-                                {currentBanner.title}
-                            </motion.h1>
-                            <motion.p 
-                                initial={{ y: 30, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.3 }}
-                                style={{ fontSize: '1.2rem', marginBottom: '2.5rem', opacity: 0.9, lineHeight: 1.6 }}
-                            >
-                                {currentBanner.description}
-                            </motion.p>
-                            <motion.div
-                                initial={{ y: 30, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.4 }}
-                            >
-                                <Link to={currentBanner.link || '/shop'} className="btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '0.8rem', borderRadius: '12px' }}>
-                                    Experience Now <ArrowRight size={22} />
-                                </Link>
-                            </motion.div>
-                        </div>
-                    </div>
-                </motion.div>
+                <Link to={currentBanner.link || '/shop'} key={currentIndex}>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.8 }}
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            backgroundImage: `url(${currentBanner.imageUrl})`,
+                            backgroundSize: 'contain',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center',
+                            display: 'flex',
+                            alignItems: 'center',
+                            cursor: 'pointer'
+                        }}
+                    />
+                </Link>
             </AnimatePresence>
 
             {/* Navigation Arrows */}
             {banners.length > 1 && (
                 <>
-                    <button 
+                    <button
                         onClick={prevSlide}
-                        style={{ position: 'absolute', left: '30px', top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.1)', color: 'white', padding: '1rem', borderRadius: '50%', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)' }}
+                        style={{ position: 'absolute', left: '30px', top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.8)', color: 'var(--text-main)', padding: '0.8rem', borderRadius: '50%', backdropFilter: 'blur(10px)', border: '1px solid var(--border)', zIndex: 10, cursor: 'pointer' }}
                     >
                         <ChevronLeft size={24} />
                     </button>
-                    <button 
+                    <button
                         onClick={nextSlide}
-                        style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.1)', color: 'white', padding: '1rem', borderRadius: '50%', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)' }}
+                        style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', background: 'rgba(255,255,255,0.8)', color: 'var(--text-main)', padding: '0.8rem', borderRadius: '50%', backdropFilter: 'blur(10px)', border: '1px solid var(--border)', zIndex: 10, cursor: 'pointer' }}
                     >
                         <ChevronRight size={24} />
                     </button>
 
                     {/* Progress Indicators */}
-                    <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '0.8rem' }}>
+                    <div style={{ position: 'absolute', bottom: '30px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '0.6rem', zIndex: 10 }}>
                         {banners.map((_, idx) => (
-                            <div 
+                            <div
                                 key={idx}
                                 onClick={() => setCurrentIndex(idx)}
-                                style={{ 
-                                    width: idx === currentIndex ? '40px' : '10px', 
-                                    height: '10px', 
-                                    background: idx === currentIndex ? 'var(--primary)' : 'rgba(255,255,255,0.3)', 
-                                    borderRadius: '5px',
+                                style={{
+                                    width: idx === currentIndex ? '30px' : '10px',
+                                    height: '6px',
+                                    background: idx === currentIndex ? 'var(--primary)' : 'rgba(0,0,0,0.1)',
+                                    borderRadius: '3px',
                                     cursor: 'pointer',
                                     transition: 'var(--transition)'
                                 }}

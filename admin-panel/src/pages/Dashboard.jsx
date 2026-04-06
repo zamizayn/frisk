@@ -88,7 +88,7 @@ const Dashboard = () => {
                         {stats.recentOrders.map(order => (
                             <div key={order.id} style={{ 
                                 display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', 
-                                background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid var(--border)' 
+                                background: 'var(--bg-dark)', borderRadius: '12px', border: '1px solid var(--border)' 
                             }}>
                                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                                     <div style={{ color: 'var(--primary)' }}><Clock size={20} /></div>
@@ -106,9 +106,9 @@ const Dashboard = () => {
                 <div className="glass" style={{ padding: '1.5rem' }}>
                     <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem' }}>Quick Actions</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
-                        <button className="btn-primary" style={{ textAlign: 'left', padding: '1rem' }}>Generate Sales Report</button>
-                        <button style={{ background: 'rgba(255,255,255,0.05)', color: 'white', textAlign: 'left', padding: '1rem' }}>Inventory Checklist</button>
-                        <button style={{ background: 'rgba(255,255,255,0.05)', color: 'white', textAlign: 'left', padding: '1rem' }}>Customer Outreach</button>
+                        <button className="btn-primary" style={{ textAlign: 'left', padding: '1.2rem' }}>Generate Sales Report</button>
+                        <button className="btn-secondary" style={{ textAlign: 'left', padding: '1.2rem' }}>Inventory Checklist</button>
+                        <button className="btn-secondary" style={{ textAlign: 'left', padding: '1.2rem' }}>Customer Outreach</button>
                     </div>
                     <div style={{ marginTop: '2rem', padding: '1.2rem', background: 'rgba(34, 211, 238, 0.05)', borderRadius: '12px', border: '1px dashed var(--accent)' }}>
                         <div style={{ display: 'flex', gap: '0.5rem', color: 'var(--accent)', marginBottom: '0.5rem' }}>

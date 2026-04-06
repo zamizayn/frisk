@@ -124,3 +124,34 @@ main {
 @media (max-width: 480px) {
   .grid-cols-4, .grid-cols-3, .grid-cols-2 { grid-template-columns: 1fr; }
 }
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Category Round Cards */
+.category-card-circle:hover .cat-img {
+    transform: scale(1.1);
+}
+.category-card-circle:hover {
+    transform: translateY(-5px);
+}
+.category-card-circle h3 {
+    transition: var(--transition);
+}
+.category-card-circle:hover h3 {
+    color: var(--primary);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.category-card img {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}

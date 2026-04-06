@@ -5,6 +5,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const bannerRoutes = require('./routes/bannerRoutes');
+const subCategoryRoutes = require('./routes/subCategoryRoutes');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/banners', bannerRoutes);
+app.use('/api/subcategories', subCategoryRoutes);
 
 // Root route
 app.get('/', (req, res) => {

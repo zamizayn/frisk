@@ -1,11 +1,11 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Package, 
-  Layers, 
-  ShoppingBag, 
-  LogOut, 
-  ChevronRight 
+import {
+    LayoutDashboard,
+    Package,
+    Layers,
+    ShoppingBag,
+    LogOut,
+    ChevronRight
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -39,20 +39,15 @@ const Sidebar = () => {
         }}>
             <div className="logo" style={{
                 fontSize: '1.5rem',
-                fontWeight: 800,
+                fontWeight: 900,
                 marginBottom: '2.5rem',
                 color: 'var(--primary)',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem'
+                gap: '0.8rem'
             }}>
-                <div style={{
-                    width: '32px',
-                    height: '32px',
-                    backgroundColor: 'var(--primary)',
-                    borderRadius: '8px'
-                }}></div>
-                Admin<span style={{ color: 'white' }}>Lite</span>
+                <img src="/friska_logo.jpeg" alt="Frisk Logo" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
+                FRISKA<span style={{ color: 'white', fontWeight: 500, fontSize: '1.1rem' }}>ADMIN</span>
             </div>
 
             <nav style={{ flex: 1 }}>
@@ -64,36 +59,43 @@ const Sidebar = () => {
                             display: 'flex',
                             alignItems: 'center',
                             gap: '1rem',
-                            padding: '0.8rem 1rem',
-                            borderRadius: '10px',
-                            color: isActive ? 'white' : 'var(--text-muted)',
-                            background: isActive ? 'linear-gradient(90deg, var(--primary) 0%, transparent 100%)' : 'transparent',
+                            padding: '0.8rem 1.2rem',
+                            borderRadius: '12px',
+                            color: isActive ? 'var(--primary)' : 'var(--text-muted)',
+                            background: isActive ? 'rgba(99, 102, 241, 0.08)' : 'transparent',
                             textDecoration: 'none',
                             marginBottom: '0.5rem',
-                            transition: 'var(--transition)'
+                            transition: 'var(--transition)',
+                            fontWeight: isActive ? 700 : 500
                         })}
                     >
-                        {item.icon}
-                        <span style={{ fontWeight: 500 }}>{item.name}</span>
-                        <ChevronRight size={14} style={{ marginLeft: 'auto', opacity: 0.5 }} />
+                        {({ isActive }) => (
+                            <>
+                                {item.icon}
+                                <span style={{ fontSize: '0.95rem' }}>{item.name}</span>
+                                {isActive && <div style={{ width: '4px', height: '18px', background: 'var(--primary)', borderRadius: '2px', marginLeft: 'auto' }} />}
+                            </>
+                        )}
                     </NavLink>
                 ))}
             </nav>
 
-            <button 
+            <button
                 onClick={handleLogout}
                 className="btn-logout"
                 style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '1rem',
-                    padding: '0.8rem 1rem',
+                    padding: '0.8rem 1.2rem',
                     color: '#ef4444',
-                    background: 'rgba(239, 68, 68, 0.1)',
-                    borderRadius: '10px',
+                    background: '#fff1f1',
+                    borderRadius: '12px',
                     width: '100%',
                     marginTop: 'auto',
-                    border: '1px solid rgba(239, 68, 68, 0.2)'
+                    border: '1px solid #fee2e2',
+                    fontWeight: 700,
+                    fontSize: '0.9rem'
                 }}
             >
                 <LogOut size={20} />
